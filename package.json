@@ -1,0 +1,12 @@
+{
+  "name": "coreva-headers",
+  "version": "0.1.0",
+  "description": "MVP: analisador de headers de segurança HTTP (Coreva Tech)",
+  "private": true,
+  "main": "server.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test \"test/*.test.js\""
+  }
+}

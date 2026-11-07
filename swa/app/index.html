@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifica — headers de segurança | Coreva Tech</title>
+  <meta name="description" content="Ferramenta gratuita da Coreva Tech que analisa os headers de segurança HTTP do seu site, dá uma nota de A+ a F e indica como corrigir.">
+  <meta property="og:title" content="Verifica — headers de segurança | Coreva Tech">
+  <meta property="og:description" content="Analise os headers de segurança HTTP do seu site e veja como corrigir.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></div>
+      <h1>Verifica <span>Headers</span></h1>
+      <p>Analise os headers de segurança HTTP do seu site, receba uma nota de A+ a F e veja como corrigir cada ponto.</p>
+    </header>
+    <form id="form" autocomplete="off">
+      <input id="url" name="url" type="text" placeholder="exemplo.com.br" aria-label="Endereço do site" required>
+      <button id="go" type="submit">Analisar</button>
+    </form>
+    <div id="ts"></div>
+    <div id="status" role="status" aria-live="polite"></div>
+    <section id="result" hidden>
+      <div class="summary">
+        <div id="grade" class="grade">–</div>
+        <div>
+          <div id="score" class="score"></div>
+          <div id="final" class="muted"></div>
+        </div>
+      </div>
+      <div id="checks"></div>
+      <details>
+        <summary>Todos os headers recebidos</summary>
+        <pre id="raw"></pre>
+      </details>
+      <aside class="cta">
+        <strong>Precisa de ajuda para corrigir?</strong>
+        <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+        <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+      </aside>
+    </section>
+    <footer>
+      Serviço gratuito da <a href="https://corevatech.com.br" target="_blank" rel="noopener">Coreva Tech</a>.
+      Lemos apenas os headers de resposta de URLs públicas. Não guardamos o conteúdo dos sites analisados.
+    </footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
