@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Coreva Headers (MVP)
 
 Analisador de headers de segurança HTTP. Node ≥ 20, sem dependências.
@@ -60,3 +61,8 @@ Publicação (alvo: `verifica.corevatech.com.br`):
 - VPS com Docker e Caddy: [DEPLOY.md](DEPLOY.md)
 
 Mais detalhes em [docs/viabilidade-e-custos.md](docs/viabilidade-e-custos.md).
+=======
+# Headers
+
+Projeto de um site para testar a segurança de uma página http referente ao seu cabeçalho (header)
+>>>>>>> 2a9f1fac06ee4f640f966f1ecae227c4134f36ad
