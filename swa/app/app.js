@@ -6,8 +6,13 @@ const ICON = { pass: '✔', warn: '▲', fail: '✖', info: 'ℹ' };
 let siteKey = null;   // preenchido por /api/config quando o Turnstile está ativo
 let widgetId = null;
 let token = null;
+let lastResult = null; // último relatório exibido (usado no nome do PDF)
 
 function render(d) {
+  lastResult = d;
+  $('ph-url').textContent = d.finalUrl;
+  $('ph-date').textContent = new Date(d.scannedAt).toLocaleString('pt-BR');
+  $('ph-host').textContent = location.host;
   const w = $('warnings');
   w.replaceChildren();
   for (const msg of d.warnings || []) {
@@ -77,6 +82,27 @@ $('form').addEventListener('submit', async (ev) => {
   } catch (e) { status.className = 'error'; status.textContent = e.message; }
   finally { btn.disabled = false; if (siteKey) resetCaptcha(); }
 });
+
+// ---- Exportar PDF: usa a impressão do navegador ("Salvar como PDF") ----
+// O título da página vira o nome sugerido do arquivo, e os headers brutos são expandidos só durante a impressão.
+let prevTitle = null;
+let prevOpen = null;
+window.addEventListener('beforeprint', () => {
+  if ($('result').hidden || !lastResult || prevTitle !== null) return; // idempotente: alguns navegadores disparam o evento mais de uma vez
+  let host = 'site';
+  try { host = new URL(lastResult.finalUrl).hostname.replace(/[^a-z0-9.-]/gi, '-'); } catch { /* mantém "site" */ }
+  prevTitle = document.title;
+  document.title = `verifica-${host}-${lastResult.scannedAt.slice(0, 10)}`;
+  const det = document.querySelector('#result details');
+  prevOpen = det.open;
+  det.open = true;
+});
+window.addEventListener('afterprint', () => {
+  if (prevTitle !== null) document.title = prevTitle;
+  if (prevOpen !== null) document.querySelector('#result details').open = prevOpen;
+  prevTitle = null; prevOpen = null;
+});
+$('pdf').addEventListener('click', () => window.print());
 
 initCaptcha();
 const q = new URLSearchParams(location.search).get('url');

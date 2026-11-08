@@ -32,3 +32,28 @@ footer{margin-top:40px;color:var(--muted);font-size:.85rem;text-align:center}
 .cta span{color:var(--muted);font-size:.93rem}.cta a,footer a{color:var(--accent);font-weight:600}
 footer{line-height:1.6}
 .warning{background:rgba(232,168,56,.14);border:1px solid var(--warn);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:.95rem;line-height:1.5}
+
+/* ---- Exportar PDF ---- */
+.toolbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+button.secondary{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:8px 16px;font-size:.92rem}
+button.secondary:hover{background:rgba(61,214,176,.12)}
+.print-only{display:none}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  :root{--bg:#fff;--card:#fff;--fg:#111;--muted:#444;--line:#cfd5e0;--accent:#0b7a63}
+  html,body{background:#fff;color:#111;font-size:12px}
+  main{max-width:none;padding:0}
+  main > header,form,#ts,#status,.toolbar{display:none !important}
+  .print-only{display:flex}
+  .print-header{align-items:center;gap:14px;padding-bottom:12px;margin-bottom:14px;border-bottom:2px solid #0b7a63}
+  .ph-title{font-size:1.5rem;font-weight:800}
+  .ph-meta{color:#444;font-size:.85rem;word-break:break-all}
+  .grade,.check,.warning,.cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .summary,.check,.warning,.cta{break-inside:avoid;box-shadow:none}
+  .check{margin-bottom:8px}
+  pre{white-space:pre-wrap;word-break:break-all;background:#f4f6fa}
+  details summary{font-weight:700;color:#111;margin-bottom:6px}
+  details{break-inside:auto}
+  footer{margin-top:16px;font-size:.75rem}
+}
