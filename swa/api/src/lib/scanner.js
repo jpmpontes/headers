@@ -157,6 +157,15 @@ function analyze(headers, finalUrl) {
   return { score, grade: gradeFor(score, checks), checks };
 }
 
+// Avisos que ajudam a interpretar o resultado (ex.: a resposta pode ser uma página de bloqueio de WAF).
+function warningsFor(status) {
+  if (status >= 500) return [`O site respondeu HTTP ${status} (erro no servidor). Os headers abaixo podem ser de uma página de erro, não do site funcionando normalmente.`];
+  if (status === 401 || status === 403) return [`O site respondeu HTTP ${status} (acesso negado). Sites protegidos por WAF ou Cloudflare costumam bloquear ferramentas automáticas, então os headers abaixo podem ser de uma página de bloqueio e não do site real. A nota pode não refletir o site de verdade.`];
+  if (status === 429) return ['O site respondeu HTTP 429 (muitas requisições) e limitou esta análise. Os headers abaixo podem não refletir o site real. Tente de novo mais tarde.'];
+  if (status >= 400) return [`O site respondeu HTTP ${status}. Os headers abaixo podem ser de uma página de erro e não da página que você quer avaliar.`];
+  return [];
+}
+
 function normalize(input) {
   const s = String(input).trim();
   return /^[a-z][a-z0-9+.-]*:\/\//i.test(s) ? s : `https://${s}`;
@@ -166,10 +175,10 @@ async function scan(input) {
   const raw = normalize(input);
   const r = await fetchHeaders(raw);
   return {
-    target: raw, finalUrl: r.finalUrl, status: r.status, redirects: r.chain,
+    target: raw, finalUrl: r.finalUrl, status: r.status, redirects: r.chain, warnings: warningsFor(r.status),
     ...analyze(r.headers, r.finalUrl),
     headers: r.headers, scannedAt: new Date().toISOString(),
   };
 }
 
-module.exports = { scan, analyze, parseCSP, normalize };
+module.exports = { scan, analyze, parseCSP, normalize, warningsFor };

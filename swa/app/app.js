@@ -8,6 +8,13 @@ let widgetId = null;
 let token = null;
 
 function render(d) {
+  const w = $('warnings');
+  w.replaceChildren();
+  for (const msg of d.warnings || []) {
+    const box = el('div', 'warning');
+    box.append(el('strong', null, '⚠ Atenção: '), document.createTextNode(msg));
+    w.append(box);
+  }
   const g = $('grade');
   g.textContent = d.grade;
   g.className = 'grade g-' + d.grade[0];

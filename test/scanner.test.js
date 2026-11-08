@@ -54,3 +54,15 @@ test('cookies sem flags e vazamento de versão', () => {
 test('parseCSP', () => {
   assert.deepStrictEqual(parseCSP("default-src 'self'; img-src a b"), { 'default-src': ["'self'"], 'img-src': ['a', 'b'] });
 });
+
+const { warningsFor } = require('../src/scanner');
+
+test('avisos para respostas 4xx/5xx e nenhum para 2xx/3xx', () => {
+  assert.deepStrictEqual(warningsFor(200), []);
+  assert.deepStrictEqual(warningsFor(301), []);
+  assert.match(warningsFor(403)[0], /HTTP 403.*WAF|Cloudflare/);
+  assert.match(warningsFor(401)[0], /HTTP 401/);
+  assert.match(warningsFor(429)[0], /429/);
+  assert.match(warningsFor(404)[0], /HTTP 404/);
+  assert.match(warningsFor(503)[0], /HTTP 503.*servidor/);
+});
