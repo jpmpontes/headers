@@ -6,6 +6,7 @@
 // Regra: o que não puder ser testado fica de fora da nota (max 0), nunca vira penalidade.
 const dns = require('node:dns');
 const { isBlockedIP } = require('./ssrf');
+const { checkDnssec } = require('./dnssec');
 const { mk, finish, attempt, climb, registrable, defaultResolver } = require('./common');
 
 const MAX_NS_QUERIED = 6;
@@ -194,7 +195,7 @@ async function checkCnameRisks(host, resolver) {
     status === 'info' ? null : 'Corrija ou remova o registro; para e-mail, aponte o MX diretamente para um nome com registro A/AAAA.', value);
 }
 
-async function checkDns(host, { resolver = defaultResolver(), serverQuery = defaultServerQuery } = {}) {
+async function checkDns(host, { resolver = defaultResolver(), serverQuery = defaultServerQuery, dohQuery } = {}) {
   const names = climb(host);
   const [a, aaaa, cname, ns, caa] = await Promise.all([
     attempt(() => resolver.resolve4(host)),
@@ -268,6 +269,8 @@ async function checkDns(host, { resolver = defaultResolver(), serverQuery = defa
 
   const divCheck = checkDiversity(probes);
   if (divCheck) checks.push(divCheck);
+
+  checks.push(await checkDnssec(host, dohQuery ? { dohQuery } : {}));
 
   const cnameCheck = await checkCnameRisks(host, resolver);
   if (cnameCheck) checks.push(cnameCheck);

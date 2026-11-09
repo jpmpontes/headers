@@ -1,4 +1,5 @@
 'use strict';
+process.env.DNSSEC_DOH = '0'; // testes nunca consultam o resolvedor DoH real
 // Resolvedor DNS simulado: a tabela mapeia "TIPO nome" -> valor. Ausente => ENODATA (ou ENOTFOUND se nxdomain).
 function fakeResolver(table, { nxdomain = false } = {}) {
   const get = (type, name) => {
