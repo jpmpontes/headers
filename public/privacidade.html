@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidade e Termos de Uso — Verifica | Coreva Tech</title>
+  <meta name="description" content="Como o Verifica, ferramenta gratuita da Coreva Tech, trata dados pessoais (LGPD) e as regras de uso do serviço.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="doc">
+    <header>
+      <div class="brand"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></div>
+      <h1>Política de Privacidade <span>e Termos de Uso</span></h1>
+      <p class="muted">Verifica — verifica.corevatech.com.br · Última atualização: 07/11/2026</p>
+      <p><a href="/">← Voltar ao Verifica</a></p>
+    </header>
+
+    <h2>1. Resumo</h2>
+    <ul>
+      <li>O Verifica consulta <strong>informações técnicas públicas</strong> do domínio que você informar: headers HTTP, certificado TLS e registros DNS.</li>
+      <li><strong>Não guardamos o resultado das análises</strong> nem o conteúdo dos sites analisados.</li>
+      <li>Não exigimos cadastro, não pedimos nome, e-mail ou telefone e não usamos cookies de rastreamento ou de publicidade.</li>
+      <li>Para evitar abuso, tratamos de forma limitada o endereço IP de quem usa o serviço (veja a seção 3).</li>
+      <li>Dúvidas e pedidos sobre dados pessoais: <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.</li>
+    </ul>
+
+    <h2>2. Quem somos</h2>
+    <p>O Verifica é um serviço gratuito mantido pela <strong>Coreva Tech</strong>, empresa de Infraestrutura, Segurança da Informação e Governança de TI, que atua como <strong>controladora</strong> dos dados tratados nesta ferramenta, nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018, “LGPD”). Contato do canal de privacidade e do Encarregado pelo Tratamento de Dados Pessoais: <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.</p>
+
+    <h2>3. Quais dados tratamos e para quê</h2>
+    <table class="doc-table">
+      <thead><tr><th>Dado</th><th>Finalidade</th><th>Guardamos?</th></tr></thead>
+      <tbody>
+        <tr><td>Endereço ou domínio que você digita, e o seletor DKIM, se informado</td><td>Realizar a análise que você pediu</td><td>Não guardamos o conteúdo da análise. O domínio pode aparecer nos registros técnicos (abaixo).</td></tr>
+        <tr><td>Resultado da análise (notas, headers, registros DNS, dados do certificado)</td><td>Exibir o relatório e permitir que você o exporte em PDF</td><td>Não. O relatório existe apenas na sua tela.</td></tr>
+        <tr><td>Endereço IP de quem acessa</td><td>Limitar o número de análises por minuto e prevenir abuso e ataques</td><td>Usado em memória, por poucos minutos. Nos registros técnicos fica só um código (hash) derivado do IP, que muda a cada dia, e não o IP em si.</td></tr>
+        <tr><td>Registros técnicos (logs): data e hora, domínio analisado, nota, tempo de resposta, erros e o hash diário do IP</td><td>Segurança, diagnóstico de falhas e melhoria do serviço</td><td>Podem ser mantidos por até 90 dias e depois são eliminados.</td></tr>
+        <tr><td>Sinais técnicos do navegador processados pelo Cloudflare Turnstile (verificação anti-robô)</td><td>Distinguir pessoas de robôs automatizados</td><td>Tratados pela Cloudflare, conforme a política dela (seção 6).</td></tr>
+      </tbody>
+    </table>
+    <p>Não coletamos dados pessoais sensíveis. Não vendemos nem compartilhamos dados para fins de publicidade. Não fazemos perfis nem decisões automatizadas sobre pessoas.</p>
+
+    <h2>4. Informações de terceiros (os sites e domínios analisados)</h2>
+    <p>O Verifica faz consultas técnicas e <strong>passivas</strong> ao domínio informado, como um navegador ou um servidor de e-mail faria: lê os headers de resposta, realiza um handshake TLS para ler o certificado e consulta registros DNS públicos, inclusive perguntando diretamente aos servidores de nomes autoritativos do domínio (apenas endereços públicos) para verificar se respondem e estão sincronizados. Não acessamos áreas restritas, não lemos o conteúdo das páginas, não lemos e-mails e não tentamos explorar vulnerabilidades.</p>
+    <p>Essas informações técnicas são públicas por natureza e, em geral, não identificam pessoas. Quando algum dado técnico puder se relacionar a uma pessoa natural (por exemplo, o nome de um titular em um certificado), ele é exibido somente a você, no relatório, e <strong>não é armazenado</strong>.</p>
+    <p>Se você é responsável por um domínio e não deseja que ele seja analisado por esta ferramenta, escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>; avaliaremos o pedido.</p>
+
+    <h2>5. Bases legais (art. 7º da LGPD)</h2>
+    <p>Tratamos os dados descritos acima com base no <strong>legítimo interesse</strong> da Coreva Tech em operar o serviço de forma segura, prevenir abusos e fraudes e manter a estabilidade da ferramenta (art. 7º, IX), e para executar a análise que você solicitou. Limitamos o tratamento ao mínimo necessário para essas finalidades.</p>
+
+    <h2>6. Com quem compartilhamos (operadores)</h2>
+    <ul>
+      <li><strong>Microsoft Azure (Static Web Apps e Functions):</strong> hospedagem do site e processamento das análises. <a href="https://privacy.microsoft.com/" target="_blank" rel="noopener">privacy.microsoft.com</a></li>
+      <li><strong>Cloudflare (Turnstile):</strong> verificação anti-robô. O widget pode usar armazenamento do navegador para funcionar. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
+      <li><strong>Cloudflare (DNS sobre HTTPS, 1.1.1.1):</strong> para verificar o DNSSEC, enviamos a esse resolvedor público <em>apenas o nome do domínio analisado</em> (informação pública). Não enviamos seu endereço IP nem qualquer dado seu: a consulta parte dos servidores do Verifica. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
+    </ul>
+    <p>Esses provedores atuam como operadores, segundo suas próprias políticas. Podemos ainda compartilhar informações se houver obrigação legal ou ordem de autoridade competente.</p>
+
+    <h2>7. Transferência internacional</h2>
+    <p>Os provedores acima podem processar dados em servidores fora do Brasil. Nesses casos, a transferência ocorre nos termos do art. 33 da LGPD, com as salvaguardas contratuais oferecidas por esses provedores.</p>
+
+    <h2>8. Cookies</h2>
+    <p>O Verifica <strong>não define cookies próprios</strong> e não utiliza ferramentas de análise de audiência ou de publicidade. O componente anti-robô da Cloudflare pode utilizar armazenamento local do navegador para realizar a verificação.</p>
+
+    <h2>9. Segurança</h2>
+    <p>Usamos conexão criptografada (HTTPS), cabeçalhos de segurança no próprio site, limites de uso por IP e por domínio e proteções contra uso indevido da ferramenta (como tentativas de acessar redes internas). Nenhum sistema é totalmente imune a falhas; se você identificar uma vulnerabilidade, avise-nos em <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.</p>
+
+    <h2>10. Seus direitos (art. 18 da LGPD)</h2>
+    <p>Você pode pedir, a qualquer momento: confirmação de que tratamos seus dados; acesso; correção; anonimização, bloqueio ou eliminação de dados desnecessários; portabilidade; informação sobre compartilhamentos; informação sobre a possibilidade de não consentir e suas consequências; e a revogação de consentimento, quando for o caso. Envie o pedido para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.</p>
+    <p>Como não guardamos o resultado das análises e os registros técnicos usam um código diário em vez do IP, talvez não seja possível identificar dados específicos de uma pessoa. Nesse caso, explicaremos o motivo na resposta. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+
+    <h2>11. Termos de uso</h2>
+    <ul>
+      <li><strong>Use para fins legítimos.</strong> Analise domínios e sites que sejam seus, ou para os quais você tenha autorização, ou ainda para consulta de segurança de boa-fé sobre informações públicas.</li>
+      <li><strong>Não é um teste de intrusão.</strong> As verificações são passivas e informativas. Uma nota alta não garante que o site ou o e-mail estejam seguros, e uma nota baixa não significa, por si só, que haja um incidente.</li>
+      <li><strong>Limitações dos resultados.</strong> Alguns sites bloqueiam ferramentas automáticas (firewalls, CDNs) e, nesse caso, o resultado pode refletir a página de bloqueio. A verificação de DKIM testa seletores comuns e não consegue descobrir todos. Os resultados são oferecidos “como estão”, sem garantia de exatidão ou de adequação a uma finalidade específica.</li>
+      <li><strong>Proibido:</strong> sobrecarregar o serviço ou os sites analisados, automatizar o uso em volume, burlar os limites ou a verificação anti-robô, ou usar a ferramenta para prejudicar terceiros. Podemos limitar ou bloquear acessos que violem estas regras.</li>
+      <li><strong>Responsabilidade.</strong> Você é responsável pelo uso que faz do relatório. A Coreva Tech não se responsabiliza por decisões tomadas exclusivamente com base nele nem por indisponibilidades do serviço gratuito.</li>
+    </ul>
+
+    <h2>12. Alterações desta política</h2>
+    <p>Podemos atualizar esta página para refletir mudanças no serviço ou na legislação. A data da última atualização aparece no topo.</p>
+
+    <h2>13. Contato</h2>
+    <p>Coreva Tech — <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a> — <a href="https://corevatech.com.br" target="_blank" rel="noopener">corevatech.com.br</a></p>
+
+    <footer><a href="/">← Voltar ao Verifica</a></footer>
+  </main>
+</body>
+</html>
