@@ -64,3 +64,9 @@ Mais detalhes em [docs/viabilidade-e-custos.md](docs/viabilidade-e-custos.md).
 ## DNS: verificações avançadas
 Saúde dos NS (consulta direta, serial do SOA), SOA/TTL, diversidade de rede dos NS, riscos de CNAME e DNSSEC
 (via Cloudflare DoH; só o nome do domínio é enviado; `DNSSEC_DOH=0` desativa). Itens não testáveis ficam fora da nota.
+
+## E-mail: verificações avançadas
+STARTTLS e certificado dos MX (porta 25, sem enviar mensagens), política MTA-STS (HTTPS, sem redirecionamento), destino dos
+relatórios DMARC (autorização externa), BIMI, DANE (TLSA) e DNS reverso dos MX. `MAIL_PROBE=0` desativa as conexões de rede
+(porta 25 e política); se a porta 25 de saída estiver bloqueada na hospedagem, os itens de STARTTLS/certificado simplesmente
+não aparecem e não afetam a nota.

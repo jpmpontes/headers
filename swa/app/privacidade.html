@@ -43,7 +43,7 @@
     <p>Não coletamos dados pessoais sensíveis. Não vendemos nem compartilhamos dados para fins de publicidade. Não fazemos perfis nem decisões automatizadas sobre pessoas.</p>
 
     <h2>4. Informações de terceiros (os sites e domínios analisados)</h2>
-    <p>O Verifica faz consultas técnicas e <strong>passivas</strong> ao domínio informado, como um navegador ou um servidor de e-mail faria: lê os headers de resposta, realiza um handshake TLS para ler o certificado e consulta registros DNS públicos, inclusive perguntando diretamente aos servidores de nomes autoritativos do domínio (apenas endereços públicos) para verificar se respondem e estão sincronizados. Não acessamos áreas restritas, não lemos o conteúdo das páginas, não lemos e-mails e não tentamos explorar vulnerabilidades.</p>
+    <p>O Verifica faz consultas técnicas e <strong>passivas</strong> ao domínio informado, como um navegador ou um servidor de e-mail faria: lê os headers de resposta, realiza um handshake TLS para ler o certificado e consulta registros DNS públicos, inclusive perguntando diretamente aos servidores de nomes autoritativos do domínio (apenas endereços públicos) para verificar se respondem e estão sincronizados. Para a análise de e-mail, o Verifica também abre uma conexão aos servidores de e-mail (MX) públicos do domínio, na porta 25, apenas para verificar se oferecem criptografia (STARTTLS) e qual certificado apresentam; <strong>nenhuma mensagem é enviada</strong> e a conexão é encerrada em seguida. Lemos ainda a política pública MTA-STS do domínio, quando existir. Não acessamos áreas restritas, não lemos o conteúdo das páginas, não lemos e-mails e não tentamos explorar vulnerabilidades.</p>
     <p>Essas informações técnicas são públicas por natureza e, em geral, não identificam pessoas. Quando algum dado técnico puder se relacionar a uma pessoa natural (por exemplo, o nome de um titular em um certificado), ele é exibido somente a você, no relatório, e <strong>não é armazenado</strong>.</p>
     <p>Se você é responsável por um domínio e não deseja que ele seja analisado por esta ferramenta, escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>; avaliaremos o pedido.</p>
 
@@ -54,6 +54,7 @@
     <ul>
       <li><strong>Microsoft Azure (Static Web Apps e Functions):</strong> hospedagem do site e processamento das análises. <a href="https://privacy.microsoft.com/" target="_blank" rel="noopener">privacy.microsoft.com</a></li>
       <li><strong>Cloudflare (Turnstile):</strong> verificação anti-robô. O widget pode usar armazenamento do navegador para funcionar. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
+      <li><strong>Cloudflare (DNS sobre HTTPS, 1.1.1.1):</strong> para verificar o DNSSEC, enviamos a esse resolvedor público <em>apenas o nome do domínio analisado</em> (informação pública). Não enviamos seu endereço IP nem qualquer dado seu: a consulta parte dos servidores do Verifica. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></li>
     </ul>
     <p>Esses provedores atuam como operadores, segundo suas próprias políticas. Podemos ainda compartilhar informações se houver obrigação legal ou ordem de autoridade competente.</p>
 

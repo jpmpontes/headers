@@ -1,4 +1,6 @@
 'use strict';
+process.env.DNSSEC_DOH = '0'; // testes nunca consultam o resolvedor DoH real
+process.env.MAIL_PROBE = '0'; // testes nunca conectam em servidores de e-mail reais
 // Resolvedor DNS simulado: a tabela mapeia "TIPO nome" -> valor. Ausente => ENODATA (ou ENOTFOUND se nxdomain).
 function fakeResolver(table, { nxdomain = false } = {}) {
   const get = (type, name) => {
@@ -10,6 +12,8 @@ function fakeResolver(table, { nxdomain = false } = {}) {
   };
   return {
     resolveSoa: async (n) => get('SOA', n),
+    resolveTlsa: async (n) => get('TLSA', n),
+    reverse: async (ip) => get('PTR', ip),
     resolveNs: async (n) => get('NS', n),
     resolve4: async (n) => get('A', n),
     resolve6: async (n) => get('AAAA', n),

@@ -4,5 +4,5 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p swa/app swa/api/src/lib
 cp -r public/. swa/app/
-cp src/ssrf.js src/fetcher.js src/scanner.js src/turnstile.js src/common.js src/dnscheck.js src/dnssec.js src/emailcheck.js src/tlscheck.js src/report.js swa/api/src/lib/
+cp src/ssrf.js src/fetcher.js src/scanner.js src/turnstile.js src/common.js src/dnscheck.js src/dnssec.js src/emailcheck.js src/mailextra.js src/tlscheck.js src/report.js swa/api/src/lib/
 echo "swa/ sincronizado a partir de public/ e src/"
