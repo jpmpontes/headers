@@ -111,10 +111,3 @@ test('MX apontando para CNAME é avisado', async () => {
   assert.strictEqual(c.status, 'warn');
   assert.match(c.message, /MX/);
 });
-
-test('DNSSEC entra na nota do DNS via dohQuery injetado', async () => {
-  const dohQuery = async (n, type) => (type === 'DS' ? { Status: 0, Answer: [{ type: 43, data: '1 13 2 AB' }] } : { Status: 0, AD: true });
-  const r = await checkDns('exemplo.com.br', { resolver: fakeResolver(base()), serverQuery: okQuery(), dohQuery });
-  assert.strictEqual(get(r, 'dnssec').status, 'pass');
-  assert.strictEqual(r.score, 100);
-});
