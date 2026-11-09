@@ -45,7 +45,7 @@ function validateUrl(raw) {
 
 // Resolve o host e devolve UM IP público validado. A conexão deve usar este IP
 // (pinning), o que impede DNS rebinding entre a checagem e o connect.
-async function resolvePublic(hostname) {
+async function resolveAllPublic(hostname) {
   const host = hostname.replace(/^\[|\]$/g, '');
   let addrs;
   if (net.isIP(host)) addrs = [{ address: host, family: net.isIP(host) }];
@@ -57,7 +57,10 @@ async function resolvePublic(hostname) {
   if (!ALLOW_PRIVATE && addrs.some((a) => isBlockedIP(a.address))) {
     throw new Error('Destino bloqueado: o domínio aponta para um endereço não público');
   }
-  return addrs[0];
+  return addrs;
 }
 
-module.exports = { isBlockedIP, validateUrl, resolvePublic };
+// Primeiro IP público validado (usado pelo scanner de headers).
+const resolvePublic = async (hostname) => (await resolveAllPublic(hostname))[0];
+
+module.exports = { isBlockedIP, validateUrl, resolvePublic, resolveAllPublic };

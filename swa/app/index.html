@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Verifica — headers de segurança | Coreva Tech</title>
-  <meta name="description" content="Ferramenta gratuita da Coreva Tech que analisa os headers de segurança HTTP do seu site, dá uma nota de A+ a F e indica como corrigir.">
-  <meta property="og:title" content="Verifica — headers de segurança | Coreva Tech">
-  <meta property="og:description" content="Analise os headers de segurança HTTP do seu site e veja como corrigir.">
+  <title>Verifica — segurança de domínio e site | Coreva Tech</title>
+  <meta name="description" content="Ferramenta gratuita da Coreva Tech que analisa os headers de segurança HTTP, o certificado TLS, o DNS e a autenticação de e-mail (SPF, DKIM e DMARC) do seu domínio.">
+  <meta property="og:title" content="Verifica — segurança de domínio e site | Coreva Tech">
+  <meta property="og:description" content="Analise headers HTTP, certificado TLS, DNS e e-mail (SPF, DKIM, DMARC) do seu domínio e veja como corrigir.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
@@ -15,13 +15,19 @@
   <main>
     <header>
       <div class="brand"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></div>
-      <h1>Verifica <span>Headers</span></h1>
-      <p>Analise os headers de segurança HTTP do seu site, receba uma nota de A+ a F e veja como corrigir cada ponto.</p>
+      <h1>Verifica <span>Segurança</span></h1>
+      <p>Analise os headers HTTP, o certificado TLS, o DNS e a autenticação de e-mail (SPF, DKIM e DMARC) do seu domínio. Receba uma nota de A+ a F e veja como corrigir cada ponto.</p>
     </header>
     <form id="form" autocomplete="off">
-      <input id="url" name="url" type="text" placeholder="exemplo.com.br" aria-label="Endereço do site" required>
+      <input id="url" name="url" type="text" placeholder="exemplo.com.br" aria-label="Domínio ou endereço do site" required>
       <button id="go" type="submit">Analisar</button>
     </form>
+    <details class="opts">
+      <summary>Opções avançadas</summary>
+      <label for="dkim">Seletor DKIM (opcional)</label>
+      <input id="dkim" form="form" type="text" placeholder="ex.: google, selector1, k1" maxlength="63" autocomplete="off">
+      <p class="hint">Testamos automaticamente os seletores mais comuns. Se você sabe qual seletor o seu provedor de e-mail usa, informe aqui.</p>
+    </details>
     <div id="ts"></div>
     <div id="status" role="status" aria-live="polite"></div>
     <section id="result" hidden>
@@ -31,12 +37,11 @@
       <div class="print-only print-header">
         <img src="/favicon.svg" alt="" width="44" height="44">
         <div>
-          <div class="ph-title">Relatório de headers de segurança</div>
-          <div class="ph-meta">Site analisado: <span id="ph-url"></span></div>
+          <div class="ph-title">Relatório de segurança de domínio e site</div>
+          <div class="ph-meta">Endereço analisado: <span id="ph-url"></span></div>
           <div class="ph-meta">Gerado em <span id="ph-date"></span> · <span id="ph-host"></span> · Coreva Tech</div>
         </div>
       </div>
-      <div id="warnings"></div>
       <div class="summary">
         <div id="grade" class="grade">–</div>
         <div>
@@ -44,11 +49,8 @@
           <div id="final" class="muted"></div>
         </div>
       </div>
-      <div id="checks"></div>
-      <details>
-        <summary>Todos os headers recebidos</summary>
-        <pre id="raw"></pre>
-      </details>
+      <div id="tabs" class="tabs" role="tablist" aria-label="Verificações"></div>
+      <div id="panels"></div>
       <aside class="cta">
         <strong>Precisa de ajuda para corrigir?</strong>
         <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
@@ -57,7 +59,11 @@
     </section>
     <footer>
       Serviço gratuito da <a href="https://corevatech.com.br" target="_blank" rel="noopener">Coreva Tech</a>.
-      Lemos apenas os headers de resposta de URLs públicas. Não guardamos o conteúdo dos sites analisados.
+      Consultamos apenas informações técnicas públicas do domínio informado (headers HTTP, certificado TLS e registros DNS)
+      e não guardamos o resultado nem o conteúdo dos sites.
+      <br>
+      <a href="/privacidade">Política de Privacidade e Termos de Uso</a> ·
+      <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>
     </footer>
   </main>
   <script src="/app.js"></script>

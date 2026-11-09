@@ -1,6 +1,7 @@
 {
   "platform": { "apiRuntime": "node:20" },
   "routes": [
+    { "route": "/privacidade", "rewrite": "/privacidade.html" },
     { "route": "/api/*", "methods": ["GET"] }
   ],
   "globalHeaders": {

@@ -1,7 +1,8 @@
 'use strict';
 // Lógica da API, independente do framework (facilita testar). As funções do Azure só adaptam entrada/saída.
 const crypto = require('node:crypto');
-const { scan, normalize } = require('./scanner');
+const { normalize } = require('./scanner');
+const { fullScan } = require('./report');
 const turnstile = require('./turnstile');
 
 const RATE_LIMIT = Number(process.env.RATE_LIMIT) || 10;          // scans/min por IP (por instância)
@@ -41,7 +42,7 @@ const anon = (ip) => crypto.createHash('sha256').update(`${LOG_SALT}|${new Date(
 const withDeadline = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('A análise demorou demais (limite de 25 s)')), ms).unref())]);
 
 // Retorna { status, body }.
-async function handleScan({ target, token, ip, log = () => {} }) {
+async function handleScan({ target, token, ip, dkim, log = () => {} }) {
   const who = anon(ip);
   const t0 = Date.now();
   const fail = (status, error, why) => { log({ ev: 'scan', ok: false, why, ip: who }); return { status, body: { error } }; };
@@ -60,8 +61,8 @@ async function handleScan({ target, token, ip, log = () => {} }) {
   }
 
   try {
-    const result = await withDeadline(scan(target), SCAN_DEADLINE_MS);
-    log({ ev: 'scan', ok: true, host, grade: result.grade, score: result.score, ms: Date.now() - t0, ip: who });
+    const result = await withDeadline(fullScan(target, { dkim: (dkim || '').slice(0, 64) || undefined }), SCAN_DEADLINE_MS);
+    log({ ev: 'scan', ok: true, host, grade: result.overall.grade, score: result.overall.score, ms: Date.now() - t0, ip: who });
     return { status: 200, body: result };
   } catch (e) {
     log({ ev: 'scan', ok: false, why: 'scan_error', host, msg: e.message, ms: Date.now() - t0, ip: who });

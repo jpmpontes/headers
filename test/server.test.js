@@ -72,7 +72,7 @@ test('verificador fora do ar: falha fechada (503)', async () => {
 test('token válido: scan executa', async () => {
   const { r, body } = await get(scanUrl('good'));
   assert.strictEqual(r.status, 200);
-  assert.ok(body.grade && body.checks.length === 10);
+  assert.ok(body.overall.grade && body.sections.headers.checks.length === 10);
 });
 
 test('limite por domínio-alvo: 4ª análise do mesmo host dá 429', async () => {

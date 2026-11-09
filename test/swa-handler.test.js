@@ -39,7 +39,7 @@ test('scan válido e log sem IP em claro', async () => {
   const logs = [];
   const r = await handleScan({ target: `http://127.0.0.1:${port}/`, ip: '9.9.9.2', log: (o) => logs.push(o) });
   assert.strictEqual(r.status, 200);
-  assert.strictEqual(r.body.checks.length, 10);
+  assert.strictEqual(r.body.sections.headers.checks.length, 10);
   assert.ok(/^[0-9a-f]{12}$/.test(logs[0].ip));
 });
 

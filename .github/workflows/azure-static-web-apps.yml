@@ -13,7 +13,7 @@ jobs:
 
       # Garante que swa/ está em dia com public/ e src/
       - name: Sincronizar swa/
-        run: bash scripts/sync-swa.sh
+        run: ./scripts/sync-swa.sh
 
       - name: Testes
         run: npm test

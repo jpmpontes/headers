@@ -3,7 +3,8 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
-const { scan, normalize } = require('./src/scanner');
+const { normalize } = require('./src/scanner');
+const { fullScan } = require('./src/report');
 const turnstile = require('./src/turnstile');
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -47,6 +48,8 @@ const FILES = {
   '/style.css': ['style.css', 'text/css; charset=utf-8'],
   '/favicon.svg': ['favicon.svg', 'image/svg+xml'],
   '/robots.txt': ['robots.txt', 'text/plain; charset=utf-8'],
+  '/privacidade': ['privacidade.html', 'text/html; charset=utf-8'],
+  '/.well-known/security.txt': ['.well-known/security.txt', 'text/plain; charset=utf-8'],
 };
 
 // Janela deslizante de 60 s, em memória (1 instância). Para várias instâncias, use Redis/Cloudflare.
@@ -110,8 +113,9 @@ async function handleScan(req, res, url) {
 
   inflight++;
   try {
-    const result = await scan(target);
-    log({ ev: 'scan', ok: true, host, grade: result.grade, score: result.score, ms: Date.now() - t0, ip: who });
+    const dkim = (url.searchParams.get('dkim') || '').slice(0, 64) || undefined;
+    const result = await fullScan(target, { dkim });
+    log({ ev: 'scan', ok: true, host, grade: result.overall.grade, score: result.overall.score, ms: Date.now() - t0, ip: who });
     return json(res, 200, result);
   } catch (e) {
     log({ ev: 'scan', ok: false, why: 'scan_error', host, msg: e.message, ms: Date.now() - t0, ip: who });

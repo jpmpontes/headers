@@ -10,6 +10,7 @@ app.http('scan', {
     const r = await handleScan({
       target: request.query.get('url'),
       token: request.query.get('cf-turnstile-response'),
+      dkim: request.query.get('dkim'),
       ip: clientIp(request.headers.get('x-forwarded-for')),
       log: (o) => context.log(JSON.stringify({ t: new Date().toISOString(), ...o })),
     });
