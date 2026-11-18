@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HSTS (HTTP Strict Transport Security): o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Header que manda o navegador usar sempre HTTPS com o seu domínio durante um período, mesmo que o usuário digite http://.">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/hsts.html">
+  <meta property="og:title" content="HSTS (HTTP Strict Transport Security): o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Header que manda o navegador usar sempre HTTPS com o seu domínio durante um período, mesmo que o usuário digite http://.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/hsts.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#headers">Headers de segurança HTTP</a></p>
+      <h1>HSTS (HTTP Strict Transport Security)</h1>
+      <p class="lead">Header que manda o navegador usar sempre HTTPS com o seu domínio durante um período, mesmo que o usuário digite http://.</p>
+    </header>
+    <section><h2>Por que importa</h2>
+      <p>Impede ataques de downgrade e &quot;SSL stripping&quot;, em que o atacante força a primeira conexão em HTTP para interceptá-la. O HSTS só vale quando recebido por HTTPS.</p>
+    </section>
+    <section><h2>Como o Verifica verifica</h2>
+      <p>Presença, max-age (recomendado a partir de 180 dias; 1 ano é o usual), includeSubDomains e preload.</p>
+    </section>
+    <section><h2>Como corrigir</h2>
+      <pre>Strict-Transport-Security: max-age=31536000; includeSubDomains</pre>
+      <p>Cuidado com o &quot;preload&quot;: entrar na lista dos navegadores é difícil de desfazer. Comece com max-age curto e aumente aos poucos.</p>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/https.html">HTTPS</a></li><li><a href="/glossario/downgrade-ssl-stripping.html">Downgrade e SSL stripping</a></li><li><a href="/glossario/redirecionamento-http-https.html">Redirecionamento de HTTP para HTTPS</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://datatracker.ietf.org/doc/html/rfc6797" target="_blank" rel="noopener noreferrer">RFC 6797 — HTTP Strict Transport Security</a></li><li><a href="https://hstspreload.org/" target="_blank" rel="noopener noreferrer">hstspreload.org</a></li></ul>
+    </section>
+    <p class="try"><a class="btn" href="/">Analisar o meu domínio agora →</a></p>
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>

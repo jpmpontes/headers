@@ -75,3 +75,12 @@ não aparecem e não afetam a nota.
 Algoritmo de assinatura, cadeia, prazo total do certificado (limites CA/B 398/200 dias), revogação (OCSP stapling, Must-Staple,
 CRL), Certificate Transparency (SCTs embutidos), sigilo futuro (PFS), cifras fracas, curvas, HTTP/2 (ALPN), redirecionamento
 HTTP→HTTPS e HSTS. Cada sonda é isolada: se uma falhar, só aquele item some do relatório.
+
+## Status de nuvens e serviços (/status)
+Painel com o que os fornecedores informam em páginas públicas (Google Cloud, AWS, Workspace; os demais aparecem como "sem fonte pública").
+`/api/status` é independente do scanner: cache de 60 s, timeout por fonte, último dado bom por até 10 min (marcado como desatualizado).
+Adaptadores em `src/status/adapters.js`; se uma fonte mudar de formato, só o adaptador dela precisa de ajuste. `STATUS_FETCH=0` desativa a leitura externa (testes).
+
+## Glossário de segurança (/glossario)
+
+Páginas estáticas, uma por verbete (46), geradas a partir de `src/glossario/*.js` por `node scripts/build-glossario.js` (o `sync-swa.sh` já roda isso). O resultado fica em `public/glossario/`, mais `sitemap.xml` e `glossario-mapa.js` (id da verificação → verbete, usado pelos links "O que é isso?" do relatório). Para criar ou editar um verbete, altere os dados, rode o gerador e faça commit dos arquivos gerados; `test/glossario.test.js` falha se estiverem desatualizados ou se uma verificação nova do Verifica ficar sem verbete. Os textos foram redigidos por IA e devem ser revisados por um profissional de segurança; as URLs de referência não foram verificadas automaticamente.

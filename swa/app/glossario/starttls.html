@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STARTTLS: o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Comando SMTP que transforma uma conexão de e-mail em texto puro em uma conexão criptografada por TLS.">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/starttls.html">
+  <meta property="og:title" content="STARTTLS: o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Comando SMTP que transforma uma conexão de e-mail em texto puro em uma conexão criptografada por TLS.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/starttls.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#email">Autenticação e segurança de e-mail</a></p>
+      <h1>STARTTLS</h1>
+      <p class="lead">Comando SMTP que transforma uma conexão de e-mail em texto puro em uma conexão criptografada por TLS.</p>
+    </header>
+    <section><h2>Por que importa</h2>
+      <p>É o que protege o e-mail em trânsito entre servidores. Sem STARTTLS, as mensagens trafegam legíveis. Como ele é oportunista, sozinho não impede um rebaixamento: para isso existem MTA-STS e DANE.</p>
+    </section>
+    <section><h2>Como o Verifica verifica</h2>
+      <p>Para os servidores MX de maior prioridade: se oferecem STARTTLS, a versão de TLS negociada e se o certificado é confiável, válido e com o nome do servidor. Nenhuma mensagem é enviada.</p>
+    </section>
+    <section><h2>Como corrigir</h2>
+      <p>Habilite STARTTLS com TLS 1.2 ou superior no servidor de e-mail ou no painel do provedor e instale um certificado válido para o nome do MX.</p>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/mta-sts.html">MTA-STS</a></li><li><a href="/glossario/dane.html">DANE (TLSA)</a></li><li><a href="/glossario/versoes-tls.html">Versões do TLS</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://datatracker.ietf.org/doc/html/rfc3207" target="_blank" rel="noopener noreferrer">RFC 3207 — STARTTLS para SMTP</a></li><li><a href="https://datatracker.ietf.org/doc/html/rfc7435" target="_blank" rel="noopener noreferrer">RFC 7435 — Segurança oportunista</a></li></ul>
+    </section>
+    <p class="try"><a class="btn" href="/">Analisar o meu domínio agora →</a></p>
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>

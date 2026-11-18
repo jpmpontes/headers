@@ -1,8 +1,26 @@
 {
-  "platform": { "apiRuntime": "node:20" },
+  "platform": {
+    "apiRuntime": "node:20"
+  },
   "routes": [
-    { "route": "/privacidade", "rewrite": "/privacidade.html" },
-    { "route": "/api/*", "methods": ["GET"] }
+    {
+      "route": "/privacidade",
+      "rewrite": "/privacidade.html"
+    },
+    {
+      "route": "/glossario",
+      "rewrite": "/glossario/index.html"
+    },
+    {
+      "route": "/status",
+      "rewrite": "/status.html"
+    },
+    {
+      "route": "/api/*",
+      "methods": [
+        "GET"
+      ]
+    }
   ],
   "globalHeaders": {
     "Content-Security-Policy": "default-src 'none'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; connect-src 'self' https://challenges.cloudflare.com; img-src 'self'; frame-src https://challenges.cloudflare.com; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",

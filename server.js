@@ -6,6 +6,7 @@ const crypto = require('node:crypto');
 const { normalize } = require('./src/scanner');
 const { fullScan } = require('./src/report');
 const turnstile = require('./src/turnstile');
+const { getStatus } = require('./src/status');
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -47,8 +48,15 @@ const FILES = {
   '/app.js': ['app.js', 'text/javascript; charset=utf-8'],
   '/style.css': ['style.css', 'text/css; charset=utf-8'],
   '/favicon.svg': ['favicon.svg', 'image/svg+xml'],
+  '/favicon.ico': ['favicon.ico', 'image/x-icon'],
   '/robots.txt': ['robots.txt', 'text/plain; charset=utf-8'],
   '/privacidade': ['privacidade.html', 'text/html; charset=utf-8'],
+  '/status': ['status.html', 'text/html; charset=utf-8'],
+  '/status.js': ['status.js', 'text/javascript; charset=utf-8'],
+  '/glossario.js': ['glossario.js', 'text/javascript; charset=utf-8'],
+  '/glossario-mapa.js': ['glossario-mapa.js', 'text/javascript; charset=utf-8'],
+  '/sitemap.xml': ['sitemap.xml', 'application/xml; charset=utf-8'],
+  '/robots.txt': ['robots.txt', 'text/plain; charset=utf-8'],
   '/.well-known/security.txt': ['.well-known/security.txt', 'text/plain; charset=utf-8'],
 };
 
@@ -67,6 +75,7 @@ function makeLimiter(max) {
 }
 const ipLimited = makeLimiter(RATE_LIMIT);
 const targetLimited = makeLimiter(TARGET_RATE_LIMIT);
+const statusLimited = makeLimiter(60); // /api/status: leitura de cache, limite folgado
 let inflight = 0;
 
 function clientIp(req) {
@@ -130,10 +139,16 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname === '/healthz') return json(res, 200, { ok: true });
   if (url.pathname === '/api/config') return json(res, 200, { turnstileSiteKey: turnstile.enabled ? turnstile.siteKey : null });
   if (url.pathname === '/api/scan') return handleScan(req, res, url);
+  if (url.pathname === '/api/status') { // independente do scanner: não usa SSRF nem o limite por domínio (URLs fixas)
+    if (statusLimited(clientIp(req))) return json(res, 429, { error: 'Muitas requisições. Tente novamente em 1 minuto.' });
+    return json(res, 200, await getStatus(), { 'Cache-Control': 'public, max-age=30' });
+  }
 
-  const f = FILES[url.pathname];
+  // Glossário: /glossario/ e /glossario/<verbete>.html (nome restrito por regex: sem acesso a outros caminhos).
+  const gm = /^\/glossario(?:\/(index|[a-z0-9-]+)\.html)?\/?$/.exec(url.pathname);
+  const f = gm ? [`glossario/${gm[1] || 'index'}.html`, 'text/html; charset=utf-8'] : FILES[url.pathname];
   if (!f) return json(res, 404, { error: 'Não encontrado' });
-  fs.readFile(path.join(PUBLIC_DIR, f[0]), (err, data) => (err ? json(res, 500, { error: 'Erro interno' }) : send(res, 200, data, f[1])));
+  fs.readFile(path.join(PUBLIC_DIR, f[0]), (err, data) => (err ? json(res, err.code === 'ENOENT' ? 404 : 500, { error: err.code === 'ENOENT' ? 'Não encontrado' : 'Erro interno' }) : send(res, 200, data, f[1])));
 });
 
 server.listen(PORT, HOST, () => log({ ev: 'start', port: PORT, turnstile: turnstile.enabled, trustProxy: TRUST_PROXY }));

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecionamento de HTTP para HTTPS: o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Configuração da porta 80 para encaminhar quem acessa por http:// para a versão https:// do mesmo endereço.">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/redirecionamento-http-https.html">
+  <meta property="og:title" content="Redirecionamento de HTTP para HTTPS: o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Configuração da porta 80 para encaminhar quem acessa por http:// para a versão https:// do mesmo endereço.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/redirecionamento-http-https.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#tls">Certificado e TLS</a></p>
+      <h1>Redirecionamento de HTTP para HTTPS</h1>
+      <p class="lead">Configuração da porta 80 para encaminhar quem acessa por http:// para a versão https:// do mesmo endereço.</p>
+    </header>
+    <section><h2>Por que importa</h2>
+      <p>É o que protege quem digita o endereço sem o &quot;https&quot;. Servir conteúdo na porta 80 sem redirecionar permite leitura e alteração na rede. O redirecionamento deve ser permanente (301 ou 308) e ficar no mesmo domínio.</p>
+    </section>
+    <section><h2>Como o Verifica verifica</h2>
+      <p>O que a porta 80 responde: redirecionamento para HTTPS do mesmo domínio, redirecionamento para HTTP, outro domínio ou conteúdo sem redirecionar.</p>
+    </section>
+    <section><h2>Como corrigir</h2>
+      <pre>return 301 https://$host$request_uri;   # nginx</pre>
+      <p>Depois de funcionar, ative o HSTS.</p>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/https.html">HTTPS</a></li><li><a href="/glossario/hsts.html">HSTS (HTTP Strict Transport Security)</a></li><li><a href="/glossario/downgrade-ssl-stripping.html">Downgrade e SSL stripping</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301" target="_blank" rel="noopener noreferrer">MDN — 301 Moved Permanently</a></li></ul>
+    </section>
+    <p class="try"><a class="btn" href="/">Analisar o meu domínio agora →</a></p>
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>

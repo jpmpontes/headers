@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BIMI (Brand Indicators for Message Identification): o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Padrão que exibe a logo da marca ao lado das mensagens autenticadas em provedores compatíveis.">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/bimi.html">
+  <meta property="og:title" content="BIMI (Brand Indicators for Message Identification): o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Padrão que exibe a logo da marca ao lado das mensagens autenticadas em provedores compatíveis.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/bimi.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#email">Autenticação e segurança de e-mail</a></p>
+      <h1>BIMI (Brand Indicators for Message Identification)</h1>
+      <p class="lead">Padrão que exibe a logo da marca ao lado das mensagens autenticadas em provedores compatíveis.</p>
+    </header>
+    <section><h2>Por que importa</h2>
+      <p>Reforça o reconhecimento da marca e dificulta golpes que imitam o remetente. Exige DMARC em quarantine ou reject e uma logo em SVG; alguns provedores pedem ainda um certificado de marca (VMC).</p>
+    </section>
+    <section><h2>Como o Verifica verifica</h2>
+      <p>Existência do registro default._bimi, endereço da logo em https/SVG e se o DMARC cumpre o pré-requisito.</p>
+    </section>
+    <section><h2>Como corrigir</h2>
+      <pre>default._bimi.exemplo.com.br.  TXT  &quot;v=BIMI1; l=https://exemplo.com.br/logo.svg&quot;</pre>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/dmarc.html">DMARC</a></li><li><a href="/glossario/spf.html">SPF (Sender Policy Framework)</a></li><li><a href="/glossario/dkim.html">DKIM (DomainKeys Identified Mail)</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://bimigroup.org/" target="_blank" rel="noopener noreferrer">BIMI Group</a></li></ul>
+    </section>
+    <p class="try"><a class="btn" href="/">Analisar o meu domínio agora →</a></p>
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>

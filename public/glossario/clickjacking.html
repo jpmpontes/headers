@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clickjacking: o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Ataque em que o site legítimo é carregado de forma invisível dentro de outra página, e o usuário clica em botões dele achando que clica em outra coisa.">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/clickjacking.html">
+  <meta property="og:title" content="Clickjacking: o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Ataque em que o site legítimo é carregado de forma invisível dentro de outra página, e o usuário clica em botões dele achando que clica em outra coisa.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/clickjacking.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#ataques">Ataques e ameaças</a></p>
+      <h1>Clickjacking</h1>
+      <p class="lead">Ataque em que o site legítimo é carregado de forma invisível dentro de outra página, e o usuário clica em botões dele achando que clica em outra coisa.</p>
+    </header>
+    <section><h2>Por que é perigoso</h2>
+      <p>O clique da vítima pode confirmar uma transferência, alterar uma configuração ou autorizar um acesso sem que ela perceba.</p>
+    </section>
+    <section><h2>Onde o Verifica ajuda</h2>
+      <p>Se o site proíbe ser incorporado em iframes de terceiros, por CSP frame-ancestors ou X-Frame-Options.</p>
+    </section>
+    <section><h2>Como se proteger</h2>
+      <pre>Content-Security-Policy: frame-ancestors &#39;none&#39;
+X-Frame-Options: DENY</pre>
+      <p>Use &#39;self&#39; em vez de &#39;none&#39; se o próprio site precisar se incorporar.</p>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/csp.html">Content-Security-Policy (CSP)</a></li><li><a href="/glossario/isolamento-cross-origin.html">Isolamento entre origens (COOP, COEP e CORP)</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://owasp.org/www-community/attacks/Clickjacking" target="_blank" rel="noopener noreferrer">OWASP — Clickjacking</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" target="_blank" rel="noopener noreferrer">MDN — X-Frame-Options</a></li></ul>
+    </section>
+    
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>

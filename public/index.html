@@ -8,18 +8,20 @@
   <meta property="og:title" content="Verifica — segurança de domínio e site | Coreva Tech">
   <meta property="og:description" content="Analise headers HTTP, certificado TLS, DNS e e-mail (SPF, DKIM, DMARC) do seu domínio e veja como corrigir.">
   <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/" aria-current="page">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
   <main>
-    <header>
-      <div class="brand"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></div>
-      <h1>Verifica <span>Segurança</span></h1>
-      <p>Analise os headers HTTP, o certificado TLS, o DNS e a autenticação de e-mail (SPF, DKIM e DMARC) do seu domínio. Receba uma nota de A+ a F e veja como corrigir cada ponto.</p>
+    <header class="hero">
+      <p class="eyebrow">Verificação gratuita · sem cadastro</p>
+      <h1>Veja como o seu domínio aparece <span>para um atacante</span></h1>
+      <p class="sub">Em cerca de 30 segundos, analisamos os headers HTTP, o certificado TLS, o DNS e a autenticação de e-mail do seu domínio. Você recebe uma nota de A+ a F e o passo a passo para corrigir cada ponto.</p>
     </header>
-    <form id="form" autocomplete="off">
-      <input id="url" name="url" type="text" placeholder="exemplo.com.br" aria-label="Domínio ou endereço do site" required>
+    <form id="form" class="searchform" autocomplete="off">
+      <input id="url" name="url" type="text" placeholder="exemplo.com.br" inputmode="url" autocapitalize="none" spellcheck="false" aria-label="Domínio ou endereço do site" required>
       <button id="go" type="submit">Analisar</button>
     </form>
     <details class="opts">
@@ -28,10 +30,18 @@
       <input id="dkim" form="form" type="text" placeholder="ex.: google, selector1, k1" maxlength="63" autocomplete="off">
       <p class="hint">Testamos automaticamente os seletores mais comuns. Se você sabe qual seletor o seu provedor de e-mail usa, informe aqui.</p>
     </details>
+    <ul id="pillars" class="pillars" aria-label="O que o Verifica analisa">
+      <li><a href="/glossario/#headers"><b>Headers HTTP</b><span>CSP, HSTS, cookies</span></a></li>
+      <li><a href="/glossario/#tls"><b>Certificado TLS</b><span>cadeia, cifras, revogação</span></a></li>
+      <li><a href="/glossario/#dns"><b>DNS</b><span>DNSSEC, CAA, servidores</span></a></li>
+      <li><a href="/glossario/#email"><b>E-mail</b><span>SPF, DKIM, DMARC</span></a></li>
+    </ul>
+    <p id="trust" class="trust">Só consultamos informações públicas · Não guardamos o resultado · Feito pela Coreva Tech</p>
     <div id="ts"></div>
     <div id="status" role="status" aria-live="polite"></div>
     <section id="result" hidden>
       <div class="toolbar">
+        <button id="issues" type="button" class="secondary" aria-pressed="false">Mostrar só o que precisa de atenção</button>
         <button id="pdf" type="button" class="secondary">Exportar PDF</button>
       </div>
       <div class="print-only print-header">
@@ -43,10 +53,11 @@
         </div>
       </div>
       <div class="summary">
-        <div id="grade" class="grade">–</div>
-        <div>
+        <div class="gauge" id="gauge"><div id="grade" class="gauge-grade">–</div></div>
+        <div class="sum-main">
           <div id="score" class="score"></div>
           <div id="final" class="muted"></div>
+          <div id="bars" class="bars"></div>
         </div>
       </div>
       <div id="tabs" class="tabs" role="tablist" aria-label="Verificações"></div>
@@ -66,6 +77,7 @@
       <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>
     </footer>
   </main>
+  <script src="/glossario-mapa.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>

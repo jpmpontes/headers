@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Status de nuvens e serviços | Verifica — Coreva Tech</title>
+  <meta name="description" content="Veja se as nuvens (Google Cloud, AWS, Azure, Alibaba) e os serviços de colaboração estão no ar, com destaque para o Brasil. Dados públicos reportados pelos fornecedores.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status" aria-current="page">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="wide">
+    <header>
+      <h1>Status <span>de nuvens e serviços</span></h1>
+      <p>Mostramos o que os próprios fornecedores informam em suas páginas públicas de status, com destaque para o Brasil. Quando não há fonte pública confiável, dizemos isso em vez de mostrar "tudo bem".</p>
+    </header>
+    <div id="notice" class="warning" role="status" aria-live="polite">Carregando…</div>
+    <section aria-labelledby="h-br">
+      <h2 id="h-br">Brasil — nuvens (São Paulo)</h2>
+      <div id="brasil" class="grid"></div>
+    </section>
+    <section aria-labelledby="h-map">
+      <h2 id="h-map">Mapa das regiões de nuvem</h2>
+      <p class="muted-p">Mapa esquemático. Hoje mostra as regiões do Google Cloud e São Paulo na AWS; os demais fornecedores não publicam dados por região.</p>
+      <div id="map" class="mapbox"></div>
+      <ul class="legend" aria-label="Legenda">
+        <li><i class="dot st-operacional"></i>Operacional</li><li><i class="dot st-degradado"></i>Degradado</li><li><i class="dot st-indisponivel"></i>Indisponível</li><li><i class="dot st-semdados"></i>Sem dados</li>
+      </ul>
+    </section>
+    <section aria-labelledby="h-cloud"><h2 id="h-cloud">Nuvens</h2><div id="cloud" class="grid"></div></section>
+    <section aria-labelledby="h-saas"><h2 id="h-saas">Colaboração e serviços globais</h2><div id="saas" class="grid"></div></section>
+    <footer>
+      Painel informativo, sem garantia de disponibilidade: ele pode falhar junto com o fornecedor ou mostrar dados com atraso. Confirme sempre na página oficial de cada fornecedor.<br>
+      Nomes de fornecedores são usados apenas para identificá-los; não há parceria nem endosso. <a href="/privacidade">Política de Privacidade</a> · <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>
+    </footer>
+  </main>
+  <script src="/status.js"></script>
+</body>
+</html>

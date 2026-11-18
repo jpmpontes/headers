@@ -1,7 +1,10 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-const ICON = { pass: '✔', warn: '▲', fail: '✖', info: 'ℹ' };
+const GLOSS = window.GLOSS || {};
+const ICON = { pass: '✔', warn: '!', fail: '✖', info: 'i' };
+const SVGNS = 'http://www.w3.org/2000/svg';
+const svg = (tag, attrs) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
 const SECTIONS = [['headers', 'Headers HTTP'], ['tls', 'Certificado TLS'], ['email', 'E-mail (SPF/DKIM/DMARC)'], ['dns', 'DNS']];
 
 let siteKey = null;   // preenchido por /api/config quando o Turnstile está ativo
@@ -37,10 +40,13 @@ function renderPanel(id, title, sec) {
   for (const c of sec.checks) {
     const card = el('div', 'check ' + c.status);
     const h = el('h3');
-    h.append(el('span', null, `${ICON[c.status]} ${c.name}`), el('span', 'pts', ptsLabel(c)));
+    const ttl = el('span', 'ttl');
+    ttl.append(el('i', 'ico ' + c.status, ICON[c.status]), el('span', null, c.name));
+    h.append(ttl, el('span', 'pts', ptsLabel(c)));
     card.append(h, el('p', null, c.message));
+    if (GLOSS[c.id]) { const a = el('a', 'learn', 'O que é isso? →'); a.href = `/glossario/${GLOSS[c.id]}.html`; a.target = '_blank'; a.rel = 'noopener'; card.append(a); }
     if (c.value) card.append(el('pre', null, c.value));
-    if (c.fix) { const f = el('div', 'fix'); f.append(el('pre', null, c.fix)); card.append(f); }
+    if (c.fix) { const f = el('details', 'fix'); f.open = c.status === 'fail'; f.append(el('summary', null, 'Como corrigir'), el('pre', null, c.fix)); card.append(f); }
     panel.append(card);
   }
   for (const d of sec.details || []) {
@@ -58,6 +64,33 @@ function show(id) {
   }
 }
 
+// Medidor circular e barras por seção: SVG feito com atributos (a CSP do site proíbe style="").
+function drawGauge(score, letter) {
+  const old = $('gauge').querySelector('svg');
+  if (old) old.remove();
+  const s = svg('svg', { viewBox: '0 0 120 120', 'aria-hidden': 'true', class: 'gauge-svg' });
+  s.append(svg('circle', { cx: 60, cy: 60, r: 52, class: 'g-track', pathLength: 100 }));
+  s.append(svg('circle', { cx: 60, cy: 60, r: 52, class: 'g-arc g-' + letter, pathLength: 100, 'stroke-dasharray': `${Math.max(0, Math.min(100, score))} 100`, transform: 'rotate(-90 60 60)' }));
+  $('gauge').prepend(s);
+}
+function drawBars(d) {
+  const box = $('bars');
+  box.replaceChildren();
+  for (const [id, title] of SECTIONS) {
+    const sec = d.sections[id];
+    const row = el('button', 'bar-row');
+    row.type = 'button';
+    row.append(el('span', 'bar-name', title));
+    const sv = svg('svg', { viewBox: '0 0 100 8', preserveAspectRatio: 'none', 'aria-hidden': 'true', class: 'bar-svg' });
+    sv.append(svg('rect', { x: 0, y: 0, width: 100, height: 8, class: 'bar-track' }));
+    if (sec.ok) sv.append(svg('rect', { x: 0, y: 0, width: sec.score, height: 8, class: 'bar-fill g-' + sec.grade[0] }));
+    row.append(sv, sec.ok ? el('span', 'chip g-' + sec.grade[0], sec.grade) : el('span', 'chip off', '!'));
+    row.setAttribute('aria-label', `${title}: ${sec.ok ? 'nota ' + sec.grade : 'não concluída'}. Abrir detalhes`);
+    row.addEventListener('click', () => { show(id); $('tabs').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    box.append(row);
+  }
+}
+
 function render(d) {
   lastResult = d;
   const hs = d.sections.headers;
@@ -67,7 +100,11 @@ function render(d) {
 
   const g = $('grade');
   g.textContent = d.overall.grade;
-  g.className = 'grade g-' + d.overall.grade[0];
+  g.className = 'gauge-grade g-' + d.overall.grade[0];
+  drawGauge(d.overall.score, d.overall.grade[0]);
+  drawBars(d);
+  $('pillars').hidden = true; $('trust').hidden = true;
+  document.body.classList.add('has-result'); // recolhe o hero para o resultado subir na tela
   $('score').textContent = `Nota geral: ${d.overall.score}/100`;
   $('final').textContent = `${d.host} · ${d.overall.sections} de ${SECTIONS.length} verificações concluídas`;
 
@@ -155,6 +192,11 @@ window.addEventListener('afterprint', () => {
   prevTitle = null; prevOpen = null;
 });
 $('pdf').addEventListener('click', () => window.print());
+$('issues').addEventListener('click', (ev) => {
+  const on = ev.currentTarget.getAttribute('aria-pressed') !== 'true';
+  ev.currentTarget.setAttribute('aria-pressed', String(on));
+  $('panels').classList.toggle('only-issues', on);
+});
 
 initCaptcha();
 const q = new URLSearchParams(location.search).get('url');

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revogação de certificados (OCSP e CRL): o que é e como funciona | Glossário Verifica</title>
+  <meta name="description" content="Mecanismos para avisar que um certificado deixou de valer antes do prazo, por exemplo porque a chave vazou. As formas são a CRL (lista de revogados) e o…">
+  <link rel="canonical" href="https://verifica.corevatech.com.br/glossario/revogacao-ocsp.html">
+  <meta property="og:title" content="Revogação de certificados (OCSP e CRL): o que é e como funciona | Glossário Verifica">
+  <meta property="og:description" content="Mecanismos para avisar que um certificado deixou de valer antes do prazo, por exemplo porque a chave vazou. As formas são a CRL (lista de revogados) e o…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://verifica.corevatech.com.br/glossario/revogacao-ocsp.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main class="article">
+    <header>
+      <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#tls">Certificado e TLS</a></p>
+      <h1>Revogação de certificados (OCSP e CRL)</h1>
+      <p class="lead">Mecanismos para avisar que um certificado deixou de valer antes do prazo, por exemplo porque a chave vazou. As formas são a CRL (lista de revogados) e o OCSP (consulta por certificado), com o &quot;stapling&quot; entregando a resposta junto do certificado.</p>
+    </header>
+    <section><h2>Por que importa</h2>
+      <p>Sem revogação funcional, um certificado comprometido continuaria aceito até expirar. O OCSP stapling evita que cada visitante consulte a CA, o que é mais rápido e mais privado. Algumas CAs já abandonaram o OCSP em favor de CRLs.</p>
+    </section>
+    <section><h2>Como o Verifica verifica</h2>
+      <p>Se há OCSP e/ou CRL no certificado, se o servidor faz stapling, a validade da resposta e o uso de OCSP Must-Staple.</p>
+    </section>
+    <section><h2>Como corrigir</h2>
+      <p>Exemplo no nginx:</p>
+      <pre>ssl_stapling on;
+ssl_stapling_verify on;</pre>
+      <p>Se o certificado tiver Must-Staple, o stapling é obrigatório: sem ele, alguns navegadores recusam o acesso.</p>
+    </section>
+    <section><h2>Veja também</h2>
+      <ul class="chips"><li><a href="/glossario/certificado-tls.html">Certificado TLS</a></li><li><a href="/glossario/certificate-transparency.html">Certificate Transparency (CT)</a></li></ul>
+    </section>
+    <section><h2>Referências</h2>
+      <ul class="refs"><li><a href="https://datatracker.ietf.org/doc/html/rfc6960" target="_blank" rel="noopener noreferrer">RFC 6960 — OCSP</a></li><li><a href="https://datatracker.ietf.org/doc/html/rfc7633" target="_blank" rel="noopener noreferrer">RFC 7633 — Must-Staple</a></li></ul>
+    </section>
+    <p class="try"><a class="btn" href="/">Analisar o meu domínio agora →</a></p>
+    <aside class="cta">
+      <strong>Quer ajuda para aplicar isso na sua empresa?</strong>
+      <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+      <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+    </aside>
+    <footer>
+      Conteúdo educativo, atualizado em novembro de 2026; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
+      <a href="/privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+</body>
+</html>
