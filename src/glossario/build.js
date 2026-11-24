@@ -42,10 +42,14 @@ const HEAD = (title, desc, canonical) => `<!doctype html>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
+  <meta property="og:image" content="https://verifica.corevatech.com.br/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="/theme.js"></script>
 </head>`;
 const NAV = () => '<nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/" aria-current="page">Glossário</a></nav>';
-const TOPBAR = `<div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a>${NAV()}<a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>`;
+const TOPBAR = `<div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a>${NAV()}<button id="theme" class="theme-btn" type="button" aria-label="Alternar tema claro ou escuro">☾</button><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>`;
 const FOOT = `<footer>
+      <p class="foot-links"><a href="/">Verifica</a> · <a href="/status">Status</a> · <a href="/glossario/">Glossário</a> · <a href="/privacidade">Privacidade</a></p>
       Conteúdo educativo, atualizado em ${REVISAO}; não substitui consultoria especializada. Encontrou um erro ou quer sugerir um termo? Escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>.<br>
       <a href="/privacidade">Política de Privacidade</a>
     </footer>`;
@@ -67,8 +71,9 @@ function verbete(v) {
   const isCheck = ['headers', 'tls', 'dns', 'email'].includes(v.categoria);
   return `${HEAD(`${v.termo}: o que é e como funciona | Glossário Verifica`, cut(v.resumo, 155), url)}
 <body>
+  <a class="skip" href="#main">Ir para o conteúdo</a>
   ${TOPBAR}
-  <main class="article">
+  <main id="main" class="article">
     <header>
       <p class="crumb"><a href="/glossario/">Glossário</a> › <a href="/glossario/#${v.categoria}">${esc(c.nome)}</a></p>
       <h1>${esc(v.termo)}</h1>
@@ -97,8 +102,9 @@ function indice() {
   }).join('\n    ');
   return `${HEAD('Glossário de segurança da informação | Verifica — Coreva Tech', `Glossário de segurança da informação com ${VERBETES.length} verbetes: headers HTTP, TLS, DNS, e-mail, ataques e governança, em português e com orientação prática.`, `${BASE}/glossario/`)}
 <body>
+  <a class="skip" href="#main">Ir para o conteúdo</a>
   ${TOPBAR}
-  <main class="wide">
+  <main id="main" class="wide">
     <header>
       <h1>Glossário de <span>segurança da informação</span></h1>
       <p>${VERBETES.length} verbetes em português: o que cada verificação do Verifica significa, os principais ataques e os conceitos de governança, sempre com o que fazer a respeito.</p>

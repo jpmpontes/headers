@@ -7,11 +7,13 @@ const { validateUrl } = require('./ssrf');
 const { checkTls } = require('./tlscheck');
 const { checkDns } = require('./dnscheck');
 const { checkEmail } = require('./emailcheck');
+const { checkPrivacy } = require('./cookiecheck');
 const { gradeOf } = require('./common');
 
 const SECTION_DEADLINE_MS = 18000;
 const WEIGHTS = { headers: 35, tls: 25, email: 25, dns: 15 }; // peso de cada seção na nota geral
-const ORDER = ['headers', 'tls', 'email', 'dns'];
+const ORDER = ['headers', 'tls', 'email', 'dns']; // seções que entram na nota geral
+const EXTRA = ['cookies']; // seções orientativas: aparecem no relatório, mas não entram na nota
 const NOT_APPLICABLE = 'Disponível apenas para nomes de domínio públicos (não para endereços IP nem nomes locais).';
 
 const withDeadline = (p, ms) => Promise.race([
@@ -40,10 +42,12 @@ async function fullScan(input, { dkim } = {}) {
     tls: () => checkTls(host),
     email: () => (isName ? checkEmail(host, { dkim }) : Promise.reject(new Error(NOT_APPLICABLE))),
     dns: () => (isName ? checkDns(host) : Promise.reject(new Error(NOT_APPLICABLE))),
+    cookies: () => checkPrivacy(raw),
   };
-  const settled = await Promise.allSettled(ORDER.map((k) => withDeadline(jobs[k](), SECTION_DEADLINE_MS)));
+  const ALL = [...ORDER, ...EXTRA];
+  const settled = await Promise.allSettled(ALL.map((k) => withDeadline(jobs[k](), SECTION_DEADLINE_MS)));
   const sections = {};
-  ORDER.forEach((k, i) => {
+  ALL.forEach((k, i) => {
     const s = settled[i];
     sections[k] = s.status === 'fulfilled' ? s.value : { ok: false, error: s.reason && s.reason.message ? s.reason.message : 'Falha inesperada.' };
   });
@@ -59,4 +63,4 @@ async function fullScan(input, { dkim } = {}) {
   };
 }
 
-module.exports = { fullScan, WEIGHTS, ORDER };
+module.exports = { fullScan, WEIGHTS, ORDER, EXTRA };

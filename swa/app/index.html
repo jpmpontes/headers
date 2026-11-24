@@ -11,14 +11,21 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
+  <meta property="og:image" content="https://verifica.corevatech.com.br/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Verifica, da Coreva Tech: veja como o seu domínio aparece para um atacante">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="/theme.js"></script>
 </head>
 <body>
-  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/" aria-current="page">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
-  <main>
+  <a class="skip" href="#main">Ir para o conteúdo</a>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/" aria-current="page">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><button id="theme" class="theme-btn" type="button" aria-label="Alternar tema claro ou escuro">☾</button><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main id="main">
     <header class="hero">
       <p class="eyebrow">Verificação gratuita · sem cadastro</p>
       <h1>Veja como o seu domínio aparece <span>para um atacante</span></h1>
-      <p class="sub">Em cerca de 30 segundos, analisamos os headers HTTP, o certificado TLS, o DNS e a autenticação de e-mail do seu domínio. Você recebe uma nota de A+ a F e o passo a passo para corrigir cada ponto.</p>
+      <p class="sub">Em cerca de 30 segundos, analisamos os headers HTTP, o certificado TLS, o DNS e a autenticação de e-mail do seu domínio, além de uma análise orientativa de cookies e privacidade. Você recebe uma nota de A+ a F e o passo a passo para corrigir cada ponto.</p>
     </header>
     <form id="form" class="searchform" autocomplete="off">
       <input id="url" name="url" type="text" placeholder="exemplo.com.br" inputmode="url" autocapitalize="none" spellcheck="false" aria-label="Domínio ou endereço do site" required>
@@ -35,10 +42,15 @@
       <li><a href="/glossario/#tls"><b>Certificado TLS</b><span>cadeia, cifras, revogação</span></a></li>
       <li><a href="/glossario/#dns"><b>DNS</b><span>DNSSEC, CAA, servidores</span></a></li>
       <li><a href="/glossario/#email"><b>E-mail</b><span>SPF, DKIM, DMARC</span></a></li>
+      <li><a href="/glossario/#privacidade"><b>Cookies</b><span>LGPD, rastreadores, banner</span></a></li>
     </ul>
     <p id="trust" class="trust">Só consultamos informações públicas · Não guardamos o resultado · Feito pela Coreva Tech</p>
     <div id="ts"></div>
     <div id="status" role="status" aria-live="polite"></div>
+    <div id="skeleton" class="skel" hidden aria-hidden="true">
+      <div class="skel-box skel-sum"></div>
+      <div class="skel-box skel-card"></div><div class="skel-box skel-card"></div><div class="skel-box skel-card"></div>
+    </div>
     <section id="result" hidden>
       <div class="toolbar">
         <button id="issues" type="button" class="secondary" aria-pressed="false">Mostrar só o que precisa de atenção</button>
@@ -63,12 +75,15 @@
       <div id="tabs" class="tabs" role="tablist" aria-label="Verificações"></div>
       <div id="panels"></div>
       <aside class="cta">
-        <strong>Precisa de ajuda para corrigir?</strong>
-        <span>A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
-        <a href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
+        <div class="cta-text">
+          <strong id="cta-title">Precisa de ajuda para corrigir?</strong>
+          <span id="cta-text">A Coreva Tech atua em Infraestrutura, Segurança da Informação e Governança de TI.</span>
+        </div>
+        <a class="btn" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva Tech →</a>
       </aside>
     </section>
     <footer>
+      <p class="foot-links"><a href="/">Verifica</a> · <a href="/status">Status</a> · <a href="/glossario/">Glossário</a> · <a href="/privacidade">Privacidade</a></p>
       Serviço gratuito da <a href="https://corevatech.com.br" target="_blank" rel="noopener">Coreva Tech</a>.
       Consultamos apenas informações técnicas públicas do domínio informado (headers HTTP, certificado TLS e registros DNS)
       e não guardamos o resultado nem o conteúdo dos sites.

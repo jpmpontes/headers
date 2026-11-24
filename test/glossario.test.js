@@ -24,7 +24,7 @@ test('verbetes: campos obrigatórios, slugs únicos e categorias válidas', () =
   for (const c of CATEGORIAS) assert.ok(VERBETES.some((v) => v.categoria === c.id), `categoria vazia: ${c.id}`);
 });
 test('verbetes de verificação têm "como verifica" e "como corrigir"', () => {
-  for (const v of VERBETES.filter((x) => ['headers', 'tls', 'dns', 'email'].includes(x.categoria))) {
+  for (const v of VERBETES.filter((x) => ['headers', 'tls', 'dns', 'email', 'privacidade'].includes(x.categoria))) {
     assert.ok(v.verifica && v.corrigir, v.slug);
   }
 });

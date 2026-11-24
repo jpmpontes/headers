@@ -36,3 +36,12 @@ test('SWA: rota /glossario reescreve para o índice', () => {
   const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'swa', 'app', 'staticwebapp.config.json'), 'utf8'));
   assert.ok(cfg.routes.some((r) => r.route === '/glossario' && r.rewrite === '/glossario/index.html'));
 });
+
+test('theme.js e og.png são servidos com o tipo correto', async () => {
+  const js = await fetch(`${base}/theme.js`);
+  assert.strictEqual(js.status, 200);
+  assert.match(js.headers.get('content-type'), /javascript/);
+  const png = await fetch(`${base}/og.png`);
+  assert.strictEqual(png.status, 200);
+  assert.strictEqual(png.headers.get('content-type'), 'image/png');
+});

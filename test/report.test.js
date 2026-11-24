@@ -39,3 +39,13 @@ test('se nenhuma seção funciona, devolve erro', async () => {
   const closed = await new Promise((res) => { const s = net.createServer().listen(0, () => { const p = s.address().port; s.close(() => res(p)); }); });
   await assert.rejects(() => fullScan(`http://127.0.0.1:${closed}/`), /Falha ao conectar/);
 });
+
+test('cookies e privacidade: aparece no relatório, mas não entra na nota nem na contagem', async () => {
+  const r = await fullScan(`http://127.0.0.1:${port}/`);
+  assert.strictEqual(r.sections.cookies.ok, true);
+  assert.strictEqual(r.sections.cookies.informativa, true);
+  assert.strictEqual(r.sections.cookies.checks.length, 6);
+  assert.strictEqual(r.overall.sections, 1);
+  assert.strictEqual(r.overall.score, r.sections.headers.score);
+  assert.ok(!('cookies' in WEIGHTS));
+});

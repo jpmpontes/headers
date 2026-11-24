@@ -1,12 +1,14 @@
 'use strict';
 const verificacoes = require('./verificacoes');
 const ameacas = require('./ameacas');
+const privacidade = require('./privacidade');
 
 const CATEGORIAS = [
   { id: 'headers', nome: 'Headers de segurança HTTP', desc: 'Os cabeçalhos que o navegador usa para proteger quem visita o seu site.' },
   { id: 'tls', nome: 'Certificado e TLS', desc: 'Como a conexão é criptografada e como o certificado prova a identidade do servidor.' },
   { id: 'dns', nome: 'DNS', desc: 'O sistema que traduz nomes em endereços e as proteções que o cercam.' },
   { id: 'email', nome: 'Autenticação e segurança de e-mail', desc: 'Como provar que um e-mail é do seu domínio e protegê-lo em trânsito.' },
+  { id: 'privacidade', nome: 'Cookies e privacidade', desc: 'Cookies, consentimento, rastreadores e política de privacidade, sob a ótica da LGPD.' },
   { id: 'ataques', nome: 'Ataques e ameaças', desc: 'Os principais ataques, o impacto que causam e como se proteger.' },
   { id: 'conceitos', nome: 'Conceitos e governança', desc: 'Fundamentos de segurança da informação, normas e legislação.' },
 ];
@@ -23,8 +25,9 @@ const CHECK_MAP = {
   ipv6: 'ipv6', caa: 'caa', dnssec: 'dnssec', cname: 'subdomain-takeover',
   mx: 'registro-mx', mxrdns: 'registro-mx', spf: 'spf', dkim: 'dkim', dmarc: 'dmarc', dmarcrep: 'dmarc', mtasts: 'mta-sts', mtastspol: 'mta-sts', tlsrpt: 'tls-rpt',
   starttls: 'starttls', mxcert: 'starttls', dane: 'dane', bimi: 'bimi',
+  ckpre: 'cookies-e-consentimento', ckexpiry: 'cookies-e-consentimento', ckflags: 'cookies-seguros', cktrackers: 'rastreadores-e-pixels', ckcmp: 'plataformas-de-consentimento', ckpolicy: 'politica-de-privacidade',
 };
 delete CHECK_MAP.hsts_;
 
-const VERBETES = [...verificacoes, ...ameacas];
+const VERBETES = [...verificacoes, ...privacidade, ...ameacas];
 module.exports = { VERBETES, CATEGORIAS, CHECK_MAP };

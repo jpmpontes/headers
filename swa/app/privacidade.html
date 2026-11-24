@@ -8,10 +8,17 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
+  <meta property="og:image" content="https://verifica.corevatech.com.br/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Verifica, da Coreva Tech: veja como o seu domínio aparece para um atacante">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="/theme.js"></script>
 </head>
 <body>
-  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
-  <main class="doc">
+  <a class="skip" href="#main">Ir para o conteúdo</a>
+  <div class="topbar"><div class="topbar-in"><a class="brand" href="https://corevatech.com.br" aria-label="Coreva Tech"><img src="/favicon.svg" alt="" width="36" height="36"><span>Coreva Tech</span></a><nav class="nav" aria-label="Seções"><a href="/">Verifica Segurança</a><a href="/status">Status de nuvens e serviços</a><a href="/glossario/">Glossário</a></nav><button id="theme" class="theme-btn" type="button" aria-label="Alternar tema claro ou escuro">☾</button><a class="btn-cta" href="https://corevatech.com.br" target="_blank" rel="noopener">Fale com a Coreva</a></div></div>
+  <main id="main" class="doc">
     <header>
       <h1>Política de Privacidade <span>e Termos de Uso</span></h1>
       <p class="muted">Verifica — verifica.corevatech.com.br · Última atualização: 07/11/2026</p>
@@ -44,7 +51,7 @@
     <p>Não coletamos dados pessoais sensíveis. Não vendemos nem compartilhamos dados para fins de publicidade. Não fazemos perfis nem decisões automatizadas sobre pessoas.</p>
 
     <h2>4. Informações de terceiros (os sites e domínios analisados)</h2>
-    <p>O Verifica faz consultas técnicas e <strong>passivas</strong> ao domínio informado, como um navegador ou um servidor de e-mail faria: lê os headers de resposta, realiza um handshake TLS para ler o certificado e consulta registros DNS públicos, inclusive perguntando diretamente aos servidores de nomes autoritativos do domínio (apenas endereços públicos) para verificar se respondem e estão sincronizados. Para a análise de e-mail, o Verifica também abre uma conexão aos servidores de e-mail (MX) públicos do domínio, na porta 25, apenas para verificar se oferecem criptografia (STARTTLS) e qual certificado apresentam; <strong>nenhuma mensagem é enviada</strong> e a conexão é encerrada em seguida. Lemos ainda a política pública MTA-STS do domínio, quando existir. Na análise de TLS, fazemos várias conexões de teste ao site (portas 443 e 80) para identificar protocolos e cifras aceitos, a resposta de revogação (OCSP) e o redirecionamento de HTTP para HTTPS; nenhum conteúdo do site é armazenado. A página de Status de nuvens e serviços lê apenas páginas públicas de status dos fornecedores, não pede nenhum dado seu e não usa cookies. Não acessamos áreas restritas, não lemos o conteúdo das páginas, não lemos e-mails e não tentamos explorar vulnerabilidades.</p>
+    <p>O Verifica faz consultas técnicas e <strong>passivas</strong> ao domínio informado, como um navegador ou um servidor de e-mail faria: lê os headers de resposta, realiza um handshake TLS para ler o certificado e consulta registros DNS públicos, inclusive perguntando diretamente aos servidores de nomes autoritativos do domínio (apenas endereços públicos) para verificar se respondem e estão sincronizados. Para a análise de e-mail, o Verifica também abre uma conexão aos servidores de e-mail (MX) públicos do domínio, na porta 25, apenas para verificar se oferecem criptografia (STARTTLS) e qual certificado apresentam; <strong>nenhuma mensagem é enviada</strong> e a conexão é encerrada em seguida. Lemos ainda a política pública MTA-STS do domínio, quando existir. Na análise de TLS, fazemos várias conexões de teste ao site (portas 443 e 80) para identificar protocolos e cifras aceitos, a resposta de revogação (OCSP) e o redirecionamento de HTTP para HTTPS; nenhum conteúdo do site é armazenado. Para a análise orientativa de cookies e privacidade, o Verifica abre a página inicial do domínio como um navegador faria e lê os cookies que o servidor define e o início do HTML (até 400 KB), apenas para identificar rastreadores conhecidos, plataformas de consentimento e links de política de privacidade; <strong>os valores dos cookies e o conteúdo da página não são armazenados</strong>, só o resultado exibido a você. A página de Status de nuvens e serviços lê apenas páginas públicas de status dos fornecedores, não pede nenhum dado seu e não usa cookies. Não acessamos áreas restritas, não armazenamos o conteúdo das páginas, não lemos e-mails e não tentamos explorar vulnerabilidades.</p>
     <p>Essas informações técnicas são públicas por natureza e, em geral, não identificam pessoas. Quando algum dado técnico puder se relacionar a uma pessoa natural (por exemplo, o nome de um titular em um certificado), ele é exibido somente a você, no relatório, e <strong>não é armazenado</strong>.</p>
     <p>Se você é responsável por um domínio e não deseja que ele seja analisado por esta ferramenta, escreva para <a href="mailto:contato@corevatech.com.br">contato@corevatech.com.br</a>; avaliaremos o pedido.</p>
 

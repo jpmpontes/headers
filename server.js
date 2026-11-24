@@ -54,6 +54,8 @@ const FILES = {
   '/status': ['status.html', 'text/html; charset=utf-8'],
   '/status.js': ['status.js', 'text/javascript; charset=utf-8'],
   '/glossario.js': ['glossario.js', 'text/javascript; charset=utf-8'],
+  '/theme.js': ['theme.js', 'text/javascript; charset=utf-8'],
+  '/og.png': ['og.png', 'image/png'],
   '/glossario-mapa.js': ['glossario-mapa.js', 'text/javascript; charset=utf-8'],
   '/sitemap.xml': ['sitemap.xml', 'application/xml; charset=utf-8'],
   '/robots.txt': ['robots.txt', 'text/plain; charset=utf-8'],
